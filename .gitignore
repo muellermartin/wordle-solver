@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+
+# Python environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# CMU Dictionary
+cmudict-0.7b
