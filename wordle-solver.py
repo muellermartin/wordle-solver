@@ -97,13 +97,14 @@ def clues_from_tries(dictionary, tries):
 
     for guess, result in tries.items():
         for i, c in enumerate(zip(guess.upper(), result)):
-            if c[1] == '_':
-                exclude_letters.append(c[0])
-            elif c[1] == c[0].lower():
+            if c[1] == c[0].lower():
                 include_letters.append(c[0])
                 exclude_positions[i].add(c[0].upper())
             elif c[1] == c[0]:
+                include_letters.append(c[0])
                 include_positions[i].add(c[0])
+            elif c[1] == '_' and c[0] not in include_letters:
+                exclude_letters.append(c[0])
 
     if DEBUG:
         print(exclude_letters)
