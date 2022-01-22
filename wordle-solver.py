@@ -107,10 +107,10 @@ def clues_from_tries(dictionary, tries):
                 exclude_letters.append(c[0])
 
     if DEBUG:
-        print(exclude_letters)
-        print(include_letters)
-        print(exclude_positions)
-        print(include_positions)
+        print('Exclude letters:', exclude_letters)
+        print('Include letters:', include_letters)
+        print('Exclude positions:', exclude_positions)
+        print('Include positions:', include_positions)
 
     for word in dictionary:
         if any([c in word for c in exclude_letters]):
