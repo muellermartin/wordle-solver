@@ -5,7 +5,7 @@ Wordle is a word guessing game similar to Hangman with elements from Mastermind.
 
 There are several popular web based versions, for example:
 - English: https://www.powerlanguage.co.uk/wordle/
-- German: wordle.uber.space/
+- German: https://wordle.uber.space/
 
 ## Usage
 
