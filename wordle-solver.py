@@ -39,7 +39,6 @@ def load_dictionary(dictionary_path):
     dictionary = []
 
     if not pathlib.Path(dictionary_path).exists():
-        print(f'Error: Dictionary file "{dictionary_path}" does not exist', file=sys.stderr)
         return None
 
     with open(dictionary_path, 'rb') as f:
@@ -134,10 +133,19 @@ def clues_from_tries(dictionary, tries):
     return candidates
 
 
-def main():
-    dictionary_path = download_dictionary(DICTIONARY_URL)
-    dictionary = load_dictionary(dictionary_path)
+def main(dictionary_path=None):
     wordle_tries = {}
+
+    if dictionary_path is not None:
+        dictionary = load_dictionary(dictionary_path)
+    else:
+        # Fallback: Check if default dictionary is available
+        dictionary = load_dictionary('cmudict-0.7b')
+
+    # Fallback: Download default dictionary and use it
+    if dictionary is None:
+        dictionary_path = download_dictionary(DICTIONARY_URL)
+        dictionary = load_dictionary(dictionary_path)
 
     print(usage())
     print('Candidates:', first_candidates(dictionary))
@@ -154,7 +162,14 @@ def main():
 
 
 if __name__ == '__main__':
+    import sys
+
+    dictionary = None
+
+    if len(sys.argv) == 2:
+        dictionary = sys.argv[1]
+
     try:
-        main()
+        main(dictionary)
     except (KeyboardInterrupt, EOFError):
         print()
